@@ -8,6 +8,6 @@ class MessageController extends Controller
 {
     public function receiveMessage()
     {
-
+        return 'Hi';
     }
 }
