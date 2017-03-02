@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Device extends Model
+class Message extends Model
 {
-    protected $table = 'devices';
+    protected $table = 'messages';
     protected $primaryKey = 'id';
 }
