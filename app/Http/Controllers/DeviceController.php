@@ -14,4 +14,10 @@ class DeviceController extends Controller
         return $devices;
         //return view('device.index', ['devices' => $devices]);
     }
+
+    public function showMessages($device_id)
+    {
+        $device = Device::findorFail($device_id);
+        return $device->messages;
+    }
 }

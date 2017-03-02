@@ -19,4 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/devices', 'DeviceController@index');//->middleware('auth');
+Route::get('/devices', 'DeviceController@index');
+Route::get('/device/{id}/messages', 'DeviceController@showMessages');
