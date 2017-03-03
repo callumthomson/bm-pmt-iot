@@ -10,7 +10,7 @@
             @foreach($devices as $device)
                 <tr>
                     <td>{{$device->name }}</td>
-                    <td>{{ $device->type_id }}</td>
+                    <td>{{ $device->device_type->name }}</td>
                 </tr>
             @endforeach
         </table>

@@ -17,4 +17,13 @@ class Device extends Model
     {
         return $this->hasMany('App\Message', 'device_id', 'id');
     }
+
+    /**
+     * RELATIONSHIP
+     * Get device type
+     */
+    public function device_type()
+    {
+        return $this->hasOne('App\DeviceType', 'id', 'id');
+    }
 }
