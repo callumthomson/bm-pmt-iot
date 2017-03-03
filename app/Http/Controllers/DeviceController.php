@@ -15,10 +15,8 @@ class DeviceController extends Controller
 
     public function index()
     {
-//         $devices = Device::all();
-//         return $devices;
-        //return view('device.index', ['devices' => $devices]);
-		return view('devices');
+        $devices = Device::all();
+        return view('device.index', ['devices' => $devices]);
     }
 
     public function showMessages($device_id)
