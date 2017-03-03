@@ -8,6 +8,7 @@
                 <th>Name</th>
                 <th>Type</th>
                 <th>Last Communication Received</th>
+                <th>Actions</th>
             </tr>
             @foreach($devices as $device)
                 <tr>
@@ -18,6 +19,10 @@
                     @else
                     <td>Never</td>
                     @endif
+                    <td>
+                        <a class="btn btn-default" href="/device/{{ $device->id }}/edit"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                        <a class="btn btn-danger" href="/device/{{ $device->id }}/delete"><i class="glyphicon glyphicon-trash"></i> Delete</a>
+                    </td>
                 </tr>
             @endforeach
         </table>
