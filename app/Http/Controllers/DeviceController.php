@@ -8,6 +8,11 @@ use App\Device;
 
 class DeviceController extends Controller
 {
+    public function __construct()
+    {
+        //$this->middleware('auth');
+    }
+
     public function index()
     {
 //         $devices = Device::all();
