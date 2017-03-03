@@ -3,6 +3,8 @@
 @section('body')
     <div class="container">
         <h1>Devices</h1>
+        <a class="btn btn-primary" href="/device/create"><i class="glyphicon glyphicon-plus"></i> New</a>
+        <br><br>
         <table class="table">
             <tr>
                 <th>Name</th>
