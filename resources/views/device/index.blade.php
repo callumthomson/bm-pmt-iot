@@ -2,6 +2,10 @@
 
 @section('body')
     <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li class="active">Devices</li>
+        </ol>
         <h1>Devices</h1>
         <p>
             All of your devices are shown here with their type and the time since they were last heard from.
