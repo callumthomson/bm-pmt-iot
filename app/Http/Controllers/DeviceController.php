@@ -33,7 +33,10 @@ class DeviceController extends Controller
 
     public function getUpdatePage($device_id)
     {
-
+        $device = Device::findOrFail($device_id);
+        return view('device.update', [
+           'device' => $device
+        ]);
     }
 
     public function getDeletePage($device_id)
