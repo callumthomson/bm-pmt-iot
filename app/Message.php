@@ -10,6 +10,8 @@ class Message extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['body'];
 
+    protected $touches = ['device'];
+
     /**
      * RELATIONSHIP
      * Get device which sent message
