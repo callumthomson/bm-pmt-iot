@@ -14,6 +14,24 @@
             </p>
             <hr>
             <h2>Status</h2>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                    <th>Unit</th>
+                </tr>
+                @foreach($device->device_type->expected_data as $expected_data)
+                <tr>
+                    <td>{{ $expected_data['display'] }}</td>
+                    @if($device->last_message)
+                        <td>{{ $device->last_message->body[$expected_data['id']] }}</td>
+                    @else
+                        <td><em>No Data</em></td>
+                    @endif
+                    <td>{{ $expected_data['unit'] }}</td>
+                </tr>
+                @endforeach
+            </table>
             <hr>
             <h2>Graphs</h2>
         </div>

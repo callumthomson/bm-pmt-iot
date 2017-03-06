@@ -29,4 +29,13 @@ class Message extends Model
     {
 
     }
+
+    /**
+     * MUTATOR
+     * Get the body array
+     */
+    public function getBodyAttribute()
+    {
+        return json_decode($this->attributes['body'], true);
+    }
 }

@@ -17,4 +17,13 @@ class DeviceType extends Model
     {
         return $this->hasMany('App\Device', 'device_id', 'id');
     }
+
+    /**
+     * MUTATOR
+     * Get the expected_data array
+     */
+    public function getExpectedDataAttribute()
+    {
+        return json_decode($this->attributes['expected_data'], true);
+    }
 }
