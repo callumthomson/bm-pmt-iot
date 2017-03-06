@@ -16,8 +16,38 @@ class DeviceController extends Controller
     public function index()
     {
         $devices = Device::all();
-        return view('device.index', ['devices' => $devices]);
+        return view('device.index', [
+            'devices' => $devices
+        ]);
     }
+
+    public function getCreatePage()
+    {
+        return view('device.create');
+    }
+
+    public function getDevicePage($device_id)
+    {
+
+    }
+
+    public function getUpdatePage($device_id)
+    {
+
+    }
+
+    public function getDeletePage($device_id)
+    {
+        $device = Device::findOrFail($device_id);
+        return view('device.delete', ['device' => $device]);
+    }
+
+    public function postDeletePage($device_id)
+    {
+        $device = Device::findOrFail($device_id);
+        $device->delete();
+        return redirect('/devices');
+}
 
     public function showMessages($device_id)
     {

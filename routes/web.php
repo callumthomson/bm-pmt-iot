@@ -11,13 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    // ...
-});
-
-Auth::routes();
-
 Route::get('/', 'HomeController@index');
 
+/*
+ * Devices
+ */
+// Index
 Route::get('/devices', 'DeviceController@index');
+// Create
+Route::get('/device/create', 'DeviceController@getCreatePage');
+// Read
+Route::get('/device/{id}', 'DeviceController@getDevicePage');
+// Update
+Route::get('/device/{id}/edit', 'DeviceController@getUpdatePage');
+// Delete
+Route::get('/device/{id}/delete', 'DeviceController@getDeletePage');
+Route::post('/device/{id}/delete', 'DeviceController@postDeletePage');
+
+
 Route::get('/device/{id}/messages', 'DeviceController@showMessages');
