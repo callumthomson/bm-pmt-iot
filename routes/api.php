@@ -20,4 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 /**
  * Recieve a message
  */
-Route::post('message', 'MessageController@receiveMessage');
+Route::post('message', 'Api\MessageController@receiveMessage');
