@@ -9,6 +9,15 @@ class Device extends Model
 {
     protected $table = 'devices';
     protected $primaryKey = 'id';
+    protected $fillable = [
+        'name', 'type_id'
+    ];
+
+    public function __construct(array $attributes = [])
+    {
+        $this->attributes['token'] = str_random(32);
+        parent::__construct($attributes);
+    }
 
     /**
      * RELATIONSHIP
@@ -25,7 +34,7 @@ class Device extends Model
      */
     public function device_type()
     {
-        return $this->hasOne('App\DeviceType', 'id', 'id');
+        return $this->hasOne('App\DeviceType', 'id', 'type_id');
     }
 
     /**

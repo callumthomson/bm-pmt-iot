@@ -20,10 +20,12 @@ Route::get('/', 'HomeController@index');
 Route::get('/devices', 'DeviceController@index');
 // Create
 Route::get('/device/create', 'DeviceController@getCreatePage');
+Route::post('/device/create', 'DeviceController@postCreatePage');
 // Read
 Route::get('/device/{id}', 'DeviceController@getDevicePage');
 // Update
 Route::get('/device/{id}/edit', 'DeviceController@getUpdatePage');
+Route::post('/device/{id}/edit', 'DeviceController@postUpdatePage');
 // Delete
 Route::get('/device/{id}/delete', 'DeviceController@getDeletePage');
 Route::post('/device/{id}/delete', 'DeviceController@postDeletePage');

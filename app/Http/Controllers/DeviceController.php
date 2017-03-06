@@ -26,7 +26,17 @@ class DeviceController extends Controller
         return view('device.create');
     }
 
-    public function getDevicePage($device_id)
+    public function postCreatePage(Request $request)
+    {
+        $device = new Device([
+            'name' => $request->input('txt-name'),
+            'type_id' => $request->input('sel-type'),
+        ]);
+        $device->save();
+        return redirect('/devices');
+    }
+
+    public function getDevicePage(Request $request, $device_id)
     {
 
     }
@@ -37,6 +47,11 @@ class DeviceController extends Controller
         return view('device.update', [
            'device' => $device
         ]);
+    }
+
+    public function postUpdatePage($device_id)
+    {
+
     }
 
     public function getDeletePage($device_id)
