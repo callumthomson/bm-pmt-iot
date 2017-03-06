@@ -20,6 +20,8 @@ class VerifyApiToken
     {
         if($this->tokenExists($request)) {
             $this->token = $request->input('token');
+        } else {
+            return response(null, 401);
         }
 
         if(!$this->tokenValid()) {
