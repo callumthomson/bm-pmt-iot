@@ -34,3 +34,4 @@ Route::post('/device/{id}/delete', 'DeviceController@postDeletePage');
 Route::get('/device/{id}/messages', 'DeviceController@showMessages');
 
 Route::get('data/device/{id}', 'DeviceController@getDeviceData');
+Route::get('data/device/{id}/expected', 'DeviceController@getDeviceExpectedData');

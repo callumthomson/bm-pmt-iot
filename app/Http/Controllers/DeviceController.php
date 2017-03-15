@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Device;
+use App\DeviceType;
 use Carbon\Carbon;
 
 class DeviceController extends Controller
@@ -84,6 +85,11 @@ class DeviceController extends Controller
         })->values();
         $device->data = $filtered;
         return $device;
+    }
+  
+    public function getDeviceExpectedData($device_id){
+        $device = Device::findorFail($device_id);
+        return DeviceType::findorFail($device->type_id);
     }
 }
 

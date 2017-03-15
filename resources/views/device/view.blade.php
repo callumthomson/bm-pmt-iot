@@ -63,7 +63,7 @@
 		[new Date('2017-03-15 13:24:41'), 23, 23]
 	];
 	(function(){
-		google.charts.setOnLoadCallback(drawBasic);
+		google.charts.setOnLoadCallback(getDeviceMessages);
 
 		setTimeout(function(){
 	// 		getDeviceMessages({{$device->id}})
@@ -76,8 +76,9 @@
 			getDeviceMessages(device_id);
 		}
 
-		function getDeviceMessages(device_id){
-			return $.ajax({
+		function getDeviceMessages(){
+			var device_id = {{$device->id}};
+			$.ajax({
 				url: 'http://' + window.location.hostname + '/data/device/' + device_id,
 	// 			async: false,
 				success: function(data){
@@ -97,8 +98,6 @@
 			})
 		}
 		
-		console.log(getDeviceMessages(2));
-
 		function drawBasic(include_data = []) {
 			var data = new google.visualization.DataTable();
 			var options = {
@@ -121,7 +120,6 @@
 			  include_data
 			);
 
-			//   $('#chart_div').empty();
 			chart.draw(data, options);
 		}
 	})()
