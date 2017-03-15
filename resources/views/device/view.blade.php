@@ -1,5 +1,18 @@
 @extends('master')
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 @section('body')
     <div class="container">
         <ol class="breadcrumb">
@@ -34,6 +47,84 @@
             </table>
             <hr>
             <h2>Graphs</h2>
+            <div id="chart_div"></div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+	google.charts.load('current', {packages: ['corechart', 'line']});
+	var include_data = [
+		[new Date('2017-03-15 13:15:43'), 0, -1],
+		[new Date('2017-03-15 13:17:24'), 10, 8],
+		[new Date('2017-03-15 13:24:41'), 23, 23]
+	];
+	(function(){
+		google.charts.setOnLoadCallback(drawBasic);
+
+		setTimeout(function(){
+	// 		getDeviceMessages({{$device->id}})
+		}, 500)
+		setInterval(function(){
+			getDeviceMessages({{ $device->id }});
+		}, 5000);
+
+		function loadAjaxData(device_id){
+			getDeviceMessages(device_id);
+		}
+
+		function getDeviceMessages(device_id){
+			return $.ajax({
+				url: 'http://' + window.location.hostname + '/data/device/' + device_id,
+	// 			async: false,
+				success: function(data){
+					var new_data = [];
+					$.each(data.data, function(i,v){
+						new_data[i] = [];
+						new_data[i][0] = new Date(v.created_at);
+						var num = 1;
+						$.each(v.body, function(ii,vv){
+							new_data[i][num] = vv;
+							num++;
+						})
+					})
+					drawBasic(new_data);
+					return new_data;
+				}
+			})
+		}
+		
+		console.log(getDeviceMessages(2));
+
+		function drawBasic(include_data = []) {
+			var data = new google.visualization.DataTable();
+			var options = {
+			  title: 'Placeholder title',
+			  hAxis: {
+				title: 'Time'
+			  },
+			  vAxis: {
+				title: 'Temp'
+			  }
+			};
+			var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+			data.addColumn('datetime', 'Date');
+			data.addColumn('number', 'Current');
+			data.addColumn('number', 'Target');
+			console.log(include_data);
+
+			data.addRows(
+			  include_data
+			);
+
+			//   $('#chart_div').empty();
+			chart.draw(data, options);
+		}
+	})()
+</script>
+
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Device;
+use Carbon\Carbon;
 
 class DeviceController extends Controller
 {
@@ -68,11 +69,34 @@ class DeviceController extends Controller
         $device = Device::findOrFail($device_id);
         $device->delete();
         return redirect('/devices');
-}
+    }
 
     public function showMessages($device_id)
     {
         $device = Device::findorFail($device_id);
         return $device->messages;
     }
+  
+    public function getDeviceData($device_id){
+        $device = Device::findorFail($device_id);
+        $filtered = $device->messages->filter(function($value, $key){
+            return $value->created_at->gt(Carbon::now()->subHours(24));
+        })->values();
+        $device->data = $filtered;
+        return $device;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

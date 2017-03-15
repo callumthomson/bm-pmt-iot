@@ -12,6 +12,9 @@ class Device extends Model
     protected $fillable = [
         'name', 'type_id'
     ];
+    protected $hidden = [
+      'messages'
+    ];
 
     public function __construct(array $attributes = [])
     {
