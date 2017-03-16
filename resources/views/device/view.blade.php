@@ -23,7 +23,7 @@
         <div class="col-sm-8 col-sm-offset-2">
             <h1>{{ $device->name }} <small>{{ $device->device_type->name }}</small></h1>
             <p>
-                Created {{ $device->created_at->diffForHumans() }}, last updated <strong>{{ $device->updated_at->diffForHumans() }}</strong>
+                Created {{ $device->created_at->diffForHumans() }}, last updated <strong id="device_last_updated">{{ $device->updated_at->diffForHumans() }}</strong>
             </p>
             <hr>
             <h2>Status</h2>
@@ -55,34 +55,28 @@
 @section('scripts')
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://raw.githubusercontent.com/rmm5t/jquery-timeago/master/jquery.timeago.js"></script>
 <script>
 	google.charts.load('current', {packages: ['corechart', 'line']});
-	var include_data = [
-		[new Date('2017-03-15 13:15:43'), 0, -1],
-		[new Date('2017-03-15 13:17:24'), 10, 8],
-		[new Date('2017-03-15 13:24:41'), 23, 23]
-	];
+	var chart_columns = [];
+	
 	(function(){
+	
+		
+	
 		google.charts.setOnLoadCallback(getDeviceMessages);
 
-		setTimeout(function(){
-	// 		getDeviceMessages({{$device->id}})
-		}, 500)
 		setInterval(function(){
 			getDeviceMessages({{ $device->id }});
 		}, 5000);
-
-		function loadAjaxData(device_id){
-			getDeviceMessages(device_id);
-		}
 
 		function getDeviceMessages(){
 			var device_id = {{$device->id}};
 			$.ajax({
 				url: 'http://' + window.location.hostname + '/data/device/' + device_id,
-	// 			async: false,
 				success: function(data){
 					var new_data = [];
+					$('#device_last_updated');
 					$.each(data.data, function(i,v){
 						new_data[i] = [];
 						new_data[i][0] = new Date(v.created_at);
@@ -96,7 +90,23 @@
 					return new_data;
 				}
 			})
-		}
+		};
+	 	getDeviceTypeInformation();
+		function getDeviceTypeInformation(){
+			var device_id = {{$device->id}};
+			$.ajax({
+				url: 'http://' + window.location.hostname + '/data/device/' + device_id + '/expected',
+				success: function(data){
+					var new_columns = [];
+					new_columns[0] = ['datetime', 'Date'];
+					$.each(data.expected_data, function(i,v){
+						new_columns[i+1] = ['number', v.display];
+					})
+					console.log(new_columns);
+					chart_columns = new_columns;
+				}
+			})
+		};
 		
 		function drawBasic(include_data = []) {
 			var data = new google.visualization.DataTable();
@@ -104,16 +114,15 @@
 			  title: 'Placeholder title',
 			  hAxis: {
 				title: 'Time'
-			  },
-			  vAxis: {
-				title: 'Temp'
 			  }
 			};
 			var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 
-			data.addColumn('datetime', 'Date');
-			data.addColumn('number', 'Current');
-			data.addColumn('number', 'Target');
+			
+			$.each(chart_columns, function(i,v){
+				data.addColumn(v[0], v[1]);
+			})
+			
 			console.log(include_data);
 
 			data.addRows(
