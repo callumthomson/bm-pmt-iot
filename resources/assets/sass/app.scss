@@ -7,3 +7,49 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+
+.navbar {
+	height: 56px;
+}
+
+.navbar-brand {
+	height: 56px;
+}
+
+.flex-parent {
+	display: flex;
+}
+
+.flex-child {
+	flex: 1;
+}
+
+.btn-clear {
+	background: none;
+	color: #636b6f;
+}
+.btn-clear:hover {
+	background: rgba(0,0,0,0.05);
+}
+
+.span-controls {
+	height: 42px;
+	margin-top: -10px;
+	margin-bottom: -10px;
+	line-height: 42px;
+	visibility: hidden
+}
+.span-controls a.btn.pull-right {
+	margin-top: 3px;
+}
+.span-controls-parent:hover .span-controls {
+	visibility: visible;
+}
+
+
+/*
+TODO
+Set global border-radius to 2px
+*/

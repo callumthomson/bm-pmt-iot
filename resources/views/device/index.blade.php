@@ -12,7 +12,7 @@
         </p>
         <a class="btn btn-primary" href="/device/create"><i class="glyphicon glyphicon-plus"></i> New</a>
         <br><br>
-        <table class="table">
+<!--         <table class="table">
             <tr>
                 <th>Name</th>
                 <th>Type</th>
@@ -34,6 +34,28 @@
                     </td>
                 </tr>
             @endforeach
-        </table>
+        </table> -->
+		@if(isset($devices))
+        	<div class="list-group">
+				@foreach($devices as $device)
+					<div class="list-group-item clearfix flex-parent span-controls-parent" onclick="location.href='/device/{{ $device->id }}'">
+						<span class="col-md-3">{{ $device->name }}</span>
+						<span class="col-md-2">{{ $device->device_type->name }}</span>
+						@if($device->last_message)
+						<span class="flex-child">{{ $device->last_message->created_at->diffForHumans() }}</span>
+						@else
+						<span class="flex-child">Never</span>
+						@endif
+						<span class="col-md-2 span-controls">
+							<a href="device/{{ $device->id }}/edit" class="btn btn-clear pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+							<a href="device/{{ $device->id }}/delete" class="btn btn-clear pull-right"><i class="glyphicon glyphicon-trash"></i></a>
+						</span>
+					</div>
+				@endforeach
+        	</div>
+		@else
+			<p>You have no devices</p>
+		@endif
+				
     </div>
 @endsection
