@@ -10,16 +10,40 @@
 
 
 
+body {
+	padding-bottom: 80px;
+}
+
 .navbar {
 	height: 56px;
+	box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+	@media (max-width: $screen-xs-max) {
+		margin-bottom: 40px;
+	}
 }
 
 .navbar-brand {
 	height: 56px;
+	line-height: 28px;
 }
 
-.flex-parent {
+.navbar .container-fluid {
+/* 	display: flex; */
+}
+
+
+
+.flex-parent-tsm {
 	display: flex;
+	@media (max-width: $screen-xs-max) {
+		display: inline-block;
+	}
+}
+
+.navbar p {
+	@media (max-width: $screen-xs-max) {
+		display: inline-block;
+	}
 }
 
 .flex-child {
@@ -38,16 +62,112 @@
 	height: 42px;
 	margin-top: -10px;
 	margin-bottom: -10px;
+	margin-right: -15px;
+	padding-right: 10px;
 	line-height: 42px;
-	visibility: hidden
+/* 	visibility: hidden; */
+	@media (max-width: $screen-xs-max) {
+		visibility: visible;
+	}
 }
 .span-controls a.btn.pull-right {
-	margin-top: 3px;
+	margin-top: 2px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	height: 36px;
+	display: block;
 }
 .span-controls-parent:hover .span-controls {
 	visibility: visible;
 }
 
+.contains-controls .btn {
+	margin-top: -8px;
+	margin-bottom: -8px;
+	visibility: hidden;
+	@media (max-width: $screen-xs-max) {
+		visibility: visible;
+	}
+}
+.contains-controls:hover .btn {
+	visibility: visible;
+}
+
+
+.list-group-item {
+	box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.24);
+}
+
+.navbar .divider-vertical {
+    height: 56px;
+    margin: -2px 0px;
+	line-height: 56px;
+}
+
+.navbar .divider-vertical:after {
+	content: '/';
+}
+
+.fab-parent {
+	height: auto;
+	width: auto;
+	padding: 23px;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+/* 	z-index: -1; */
+/* 	background: red; */
+}
+
+.fab-main  {
+	background-color: #d23f31;
+	color: #fff;
+    height: 56px;
+    position: relative;
+    width: 56px;
+	border-radius: 50%;
+	line-height: 58px;
+	text-align: center;
+	font-size: 20px;
+}
+
+.fab-secondary  {
+/* 	opacity: 0; */
+/* 	transition: all ease-in-out 0.2s; */
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+.fab-secondary a {
+	display: block;
+	background-color: #d23f31;
+	color: #fff;
+	height: 40px;
+	position: relative;
+	width: 40px;
+	margin-left: 8px;
+	border-radius: 50%;
+	line-height: 40px;
+	text-align: center;
+	font-size: 20px;
+	
+}
+.fab-parent:hover .fab-secondary {
+	opacity: 1;
+}
+
+@media (max-width: $screen-xs-max) {
+  
+}
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  
+}
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  
+}
+@media (min-width: $screen-lg-min) {
+  
+}
 
 /*
 TODO

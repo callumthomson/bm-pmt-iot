@@ -1,13 +1,17 @@
 @extends('master')
 
+@section('breadcrumb')
+<p class="navbar-text"><a href="/">Home</a></p>
+<p class="navbar-text divider-vertical"></p>
+<p class="navbar-text"><a href="/devices">Devices</a></p>
+<p class="navbar-text divider-vertical"></p>
+<p class="navbar-text"><a href="/device/{{ $device->id }}">{{ $device->name }}</a></p>
+<p class="navbar-text divider-vertical"></p>
+<p class="navbar-text">Edit</p>
+@endsection
+
 @section('body')
     <div class="container">
-        <ol class="breadcrumb">
-            <li><a href="/">Home</a></li>
-            <li><a href="/devices">Devices</a></li>
-            <li><a href="/device/{{ $device->id }}">{{ $device->name }}</a></li>
-            <li class="active">Edit</li>
-        </ol>
         <div class="col-sm-8 col-sm-offset-2">
             <h1>Update {{ $device->name }}</h1>
             <form class="form-horizontal" method="post">

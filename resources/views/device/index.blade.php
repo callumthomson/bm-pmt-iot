@@ -1,61 +1,55 @@
 @extends('master')
 
+@section('breadcrumb')
+<p class="navbar-text"><a href="/">Home</a></p>
+<p class="navbar-text divider-vertical"></p>
+<p class="navbar-text">Devices</p>
+@endsection
+
 @section('body')
     <div class="container">
-        <ol class="breadcrumb">
-            <li><a href="/">Home</a></li>
-            <li class="active">Devices</li>
-        </ol>
-        <h1>Devices</h1>
+<!--         <h1>Devices</h1> -->
         <p>
             All of your devices are shown here with their type and the time since they were last heard from.
         </p>
-        <a class="btn btn-primary" href="/device/create"><i class="glyphicon glyphicon-plus"></i> New</a>
-        <br><br>
-<!--         <table class="table">
-            <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Last Communication Received</th>
-                <th>Actions</th>
-            </tr>
-            @foreach($devices as $device)
-                <tr onclick="location.href='/device/{{ $device->id }}'" style="cursor:pointer;">
-                    <td>{{ $device->name }}</td>
-                    <td>{{ $device->device_type->name }}</td>
-                    @if($device->last_message)
-                    <td>{{ $device->last_message->created_at->diffForHumans() }}</td>
-                    @else
-                    <td>Never</td>
-                    @endif
-                    <td>
-                        <a class="btn btn-default" href="/device/{{ $device->id }}/edit"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-                        <a class="btn btn-danger" href="/device/{{ $device->id }}/delete"><i class="glyphicon glyphicon-trash"></i> Delete</a>
-                    </td>
-                </tr>
-            @endforeach
-        </table> -->
+<!--         <a class="btn btn-primary" href="/device/create"><i class="glyphicon glyphicon-plus"></i> New</a> -->
 		@if(isset($devices))
-        	<div class="list-group">
+			<div class="list-group">
 				@foreach($devices as $device)
-					<div class="list-group-item clearfix flex-parent span-controls-parent" onclick="location.href='/device/{{ $device->id }}'">
-						<span class="col-md-3">{{ $device->name }}</span>
-						<span class="col-md-2">{{ $device->device_type->name }}</span>
+					<a class="list-group-item clearfix flex-parent contains-controls" href="device/{{$device->id}}">
+						<div class="col-md-3 col-sm-12">{{ $device->name }}</div>
+						<div class="col-md-2 col-sm-2">{{ $device->device_type->name }}</div>
 						@if($device->last_message)
-						<span class="flex-child">{{ $device->last_message->created_at->diffForHumans() }}</span>
+						<div class="flex-child col-sm-2">{{ $device->last_message->created_at->diffForHumans() }}</div>
 						@else
-						<span class="flex-child">Never</span>
+						<div class="flex-child col-sm-2">Never</div>
 						@endif
-						<span class="col-md-2 span-controls">
-							<a href="device/{{ $device->id }}/edit" class="btn btn-clear pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
-							<a href="device/{{ $device->id }}/delete" class="btn btn-clear pull-right"><i class="glyphicon glyphicon-trash"></i></a>
-						</span>
-					</div>
+						<div class="btn btn-clear pull-right open-href" href="device/{{$device->id}}/edit"><i class="glyphicon glyphicon-pencil"></i></div>
+						<div class="btn btn-clear pull-right open-href" href="device/{{$device->id}}/delete"><i class="glyphicon glyphicon-trash"></i></div>
+					</a>
 				@endforeach
-        	</div>
+			</div>
 		@else
 			<p>You have no devices</p>
 		@endif
 				
     </div>
+@endsection
+
+@section('fab')
+	<div class="fab-secondary">
+		<a href=""><i class="glyphicon glyphicon-pencil"></i></a>
+	</div>
+	<div class="fab-main" onclick="location.href='/device/create'"><i class="glyphicon glyphicon-plus"></i></div>
+@endsection
+
+@section('scripts')
+<script>
+	$(document).on('click', '.open-href', function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		console.log('open-href', this, $(this).attr('href'));
+		location.href=$(this).attr('href');
+	})
+</script>
 @endsection
