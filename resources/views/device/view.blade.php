@@ -36,7 +36,7 @@
                     @else
                         <td><em>No Data</em></td>
                     @endif
-                    <td>{{ $expected_data['unit'] }}</td>
+                    <td>{!! $expected_data['unit'] !!}</td>
                 </tr>
                 @endforeach
             </table>
@@ -105,7 +105,6 @@
 		function drawBasic(include_data = []) {
 			var data = new google.visualization.DataTable();
 			var options = {
-			  title: 'Placeholder title',
 			  hAxis: {
 				title: 'Time'
 			  }
