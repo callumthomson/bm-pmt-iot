@@ -35,3 +35,12 @@ Route::get('/device/{id}/messages', 'DeviceController@showMessages');
 
 Route::get('data/device/{id}', 'DeviceController@getDeviceData');
 Route::get('data/device/{id}/expected', 'DeviceController@getDeviceExpectedData');
+Route::get('test/datagen/{device}/{id}', function(\App\Device $device, $id){
+	// TODO find a way to generate realistic data for a device type
+	$device->messages;
+	$device->device_type;
+	for($i=0;$i<100;$i++){
+
+	}
+	return $device;
+});
