@@ -41,6 +41,7 @@ class DeviceController extends Controller
     public function getDevicePage(Request $request, $device_id)
     {
         $device = Device::findOrFail($device_id);
+		$device->device_type;
         return view('device.view', [
             'device' => $device
         ]);

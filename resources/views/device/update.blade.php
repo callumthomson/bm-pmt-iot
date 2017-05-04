@@ -1,11 +1,11 @@
 @extends('master')
 
 @section('breadcrumb')
-<p class="navbar-text"><a href="/">Home</a></p>
+<p class="navbar-text"><a href="{{url('/')}}">Home</a></p>
 <p class="navbar-text divider-vertical"></p>
-<p class="navbar-text"><a href="/devices">Devices</a></p>
+<p class="navbar-text"><a href="{{url('/devices')}}">Devices</a></p>
 <p class="navbar-text divider-vertical"></p>
-<p class="navbar-text"><a href="/device/{{ $device->id }}">{{ $device->name }}</a></p>
+<p class="navbar-text"><a href="{{url('/device/'.$device->id)}}">{{ $device->name }}</a></p>
 <p class="navbar-text divider-vertical"></p>
 <p class="navbar-text">Edit</p>
 @endsection

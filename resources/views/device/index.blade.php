@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('breadcrumb')
-<p class="navbar-text"><a href="/">Home</a></p>
+<p class="navbar-text"><a href="{{url('/')}}">Home</a></p>
 <p class="navbar-text divider-vertical"></p>
 <p class="navbar-text">Devices</p>
 @endsection
@@ -16,7 +16,7 @@
 		@if(isset($devices))
 			<div class="list-group">
 				@foreach($devices as $device)
-					<a class="list-group-item clearfix flex-parent contains-controls" href="device/{{$device->id}}">
+					<a class="list-group-item clearfix flex-parent contains-controls" href="{{url('/device/'.$device->id)}}">
 						<div class="col-md-3 col-sm-12">{{ $device->name }}</div>
 						<div class="col-md-2 col-sm-2">{{ $device->device_type->name }}</div>
 						@if($device->last_message)
@@ -24,8 +24,8 @@
 						@else
 						<div class="flex-child col-sm-2">Never</div>
 						@endif
-						<div class="btn btn-clear pull-right open-href" href="device/{{$device->id}}/edit"><i class="glyphicon glyphicon-pencil"></i></div>
-						<div class="btn btn-clear pull-right open-href" href="device/{{$device->id}}/delete"><i class="glyphicon glyphicon-trash"></i></div>
+						<div class="btn btn-clear pull-right open-href" href="{{url('/device/'.$device->id.'/edit')}}"><i class="mdi mdi-pencil"></i></div>
+						<div class="btn btn-clear pull-right open-href" href="{{url('/device/'.$device->id.'/delete')}}"><i class="mdi mdi-delete"></i></div>
 					</a>
 				@endforeach
 			</div>
@@ -37,10 +37,7 @@
 @endsection
 
 @section('fab')
-<!-- 	<div class="fab-secondary">
-		<a href=""><i class="glyphicon glyphicon-pencil"></i></a>
-	</div> -->
-	<div class="fab-main" onclick="location.href='/device/create'"><i class="glyphicon glyphicon-plus"></i></div>
+	<div class="fab-main" onclick="location.href='{{url('/device/create')}}'"><i class="glyphicon glyphicon-plus"></i></div>
 @endsection
 
 @section('scripts')
