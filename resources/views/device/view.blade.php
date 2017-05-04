@@ -18,7 +18,7 @@
         <div class="col-sm-8 col-sm-offset-2">
             <h1>{{ $device->name }} <small>{{ $device->device_type->name }}</small></h1>
             <p>
-                Created {{ $device->created_at->diffForHumans() }}, last updated <strong id="device_last_updated">{{ $device->updated_at->diffForHumans() }}</strong>
+                Created <span class="fromNow" time="{{ $device->created_at }}"></span>, last updated <strong id="device_last_updated" class="fromNow" time="{{ $device->updated_at }}"></strong>
             </p>
             <hr>
             <h2>Status</h2>
@@ -50,7 +50,6 @@
 @section('scripts')
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="https://raw.githubusercontent.com/rmm5t/jquery-timeago/master/jquery.timeago.js"></script>
 <script>
 	google.charts.load('current', {packages: ['corechart', 'line']});
 	var chart_columns = [];

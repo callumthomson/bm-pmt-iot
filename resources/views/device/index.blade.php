@@ -20,7 +20,7 @@
 						<div class="col-md-3 col-sm-12">{{ $device->name }}</div>
 						<div class="col-md-2 col-sm-2">{{ $device->device_type->name }}</div>
 						@if($device->last_message)
-						<div class="flex-child col-sm-2">{{ $device->last_message->created_at->diffForHumans() }}</div>
+						<div class="flex-child col-sm-2 fromNow" time="{{$device->last_message->created_at}}"></div>
 						@else
 						<div class="flex-child col-sm-2">Never</div>
 						@endif
@@ -37,9 +37,9 @@
 @endsection
 
 @section('fab')
-	<div class="fab-secondary">
+<!-- 	<div class="fab-secondary">
 		<a href=""><i class="glyphicon glyphicon-pencil"></i></a>
-	</div>
+	</div> -->
 	<div class="fab-main" onclick="location.href='/device/create'"><i class="glyphicon glyphicon-plus"></i></div>
 @endsection
 
