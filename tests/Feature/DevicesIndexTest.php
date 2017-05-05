@@ -7,17 +7,17 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class HomePageTest extends TestCase
+class DevicesIndexTest extends TestCase
 {
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function testRedirectOK()
+    public function testExample()
     {
-        $response = $this->get('/');
+        $response = $this->get('/devices');
 
-        $response->assertRedirect('devices');
+        $response->assertStatus(200);
     }
 }
