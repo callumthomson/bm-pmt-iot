@@ -42,6 +42,9 @@ class DeviceTest extends DuskTestCase
         });
     }
 
+    /**
+     * Test updating a device
+     */
     public function testEditDevice()
     {
         $this->browse(function (Browser $browser) {
@@ -50,10 +53,44 @@ class DeviceTest extends DuskTestCase
                 ->click('#devices-list-group a:nth-child(5) i.mdi-pencil')
                 ->assertPathIs('/device/5/edit')
                 ->assertSee('Update Electricity Meter')
-                ->type('txt-name', 'Water Meter Updated')
+                ->type('txt-name', 'Electricity Meter U')
                 ->press('Save')
                 ->assertPathIs('/devices')
-                ->assertSee('Water Meter Updated');
+                ->assertSee('Electricity Meter U');
+        });
+    }
+
+    /**
+     * Test deleting a device
+     */
+    public function testDeleteDevice()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/devices')
+                ->mouseover('#devices-list-group a:nth-child(5) i.mdi-delete')
+                ->click('#devices-list-group a:nth-child(5) i.mdi-delete')
+                ->assertPathIs('/device/5/delete')
+                ->assertSee('Delete Electricity Meter U')
+                ->press('Delete')
+                ->assertPathIs('/devices')
+                ->assertDontSee('Electricity Meter U');
+        });
+    }
+
+    /**
+     * Test creating a device
+     */
+    public function testCreateDevice()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/devices')
+                ->click('.fab-main i.glyphicon-plus')
+                ->assertPathIs('/device/create')
+                ->type('txt-name', 'New Device')
+                ->select('sel-type', '1')
+                ->press('Save')
+                ->assertPathIs('/devices')
+                ->assertSee('New Device');
         });
     }
 }
