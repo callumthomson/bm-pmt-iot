@@ -58,6 +58,15 @@ class DeviceController extends Controller
     public function postUpdatePage(Request $request, $device_id)
     {
         $device = Device::findOrFail($device_id);
+
+        $name = $request->input('txt-name');
+        $type = DeviceType::findOrFail($request->input('sel-type'));
+
+        $device->name = $name;
+        $device->device_type()->save($type);
+        $device->save();
+
+        return redirect('/devices');
     }
 
     public function getDeletePage($device_id)
