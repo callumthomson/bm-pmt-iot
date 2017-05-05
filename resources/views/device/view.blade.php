@@ -64,7 +64,7 @@
             function getDeviceMessages() {
                 var device_id = {{$device->id}};
                 $.ajax({
-                    url: "{{url('/data/device/'.$device->id)}}",
+                    url: "{{url('/data/device/'.$device->id.'/test')}}",
                     success: function (data) {
                         var new_data = [];
                         $('#device_last_updated');
