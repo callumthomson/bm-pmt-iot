@@ -55,9 +55,9 @@ class DeviceController extends Controller
         ]);
     }
 
-    public function postUpdatePage($device_id)
+    public function postUpdatePage(Request $request, $device_id)
     {
-
+        $device = Device::findOrFail($device_id);
     }
 
     public function getDeletePage($device_id)

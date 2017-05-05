@@ -14,7 +14,7 @@
         </p>
 <!--         <a class="btn btn-primary" href="/device/create"><i class="glyphicon glyphicon-plus"></i> New</a> -->
 		@if(isset($devices))
-			<div class="list-group">
+			<div class="list-group" id="devices-list-group">
 				@foreach($devices as $device)
 					<a class="list-group-item clearfix flex-parent contains-controls" href="{{url('/device/'.$device->id)}}">
 						<div class="col-md-3 col-sm-12">{{ $device->name }}</div>
