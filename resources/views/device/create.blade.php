@@ -12,6 +12,15 @@
     <div class="container">
         <div class="col-sm-8 col-sm-offset-2">
             <h1>Create New Device</h1>
+            @if(count($errors) > 0)
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                    </ul>
+                </div>
+            @endif
             <form class="form-horizontal" method="post">
                 <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Name</label>

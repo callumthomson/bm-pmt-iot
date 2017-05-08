@@ -8,8 +8,15 @@ use App\Device;
 use App\DeviceType;
 use Carbon\Carbon;
 
+use Validator;
+
 class DeviceController extends Controller
 {
+    private $validatorMessages = [
+        'txt-name.required' => 'You must provide a name',
+        'txt-name.max' => 'That name is too long',
+    ];
+
     public function __construct()
     {
         //$this->middleware('auth');
@@ -30,11 +37,19 @@ class DeviceController extends Controller
 
     public function postCreatePage(Request $request)
     {
-        $device = new Device([
-            'name' => $request->input('txt-name'),
-            'type_id' => $request->input('sel-type'),
-        ]);
-        $device->save();
+        $validator = Validator::make($request->all(), [
+            'txt-name' => 'required|max:255',
+            'sel-type' => 'required|exists:device_types,id',
+        ], $this->validatorMessages);
+        if($validator->fails()) {
+            return back()->withInput()->withErrors($validator);
+        } else {
+            $device = new Device([
+                'name' => $request->input('txt-name'),
+                'type_id' => $request->input('sel-type'),
+            ]);
+            $device->save();
+        }
         return redirect('/devices');
     }
 
@@ -59,14 +74,21 @@ class DeviceController extends Controller
     {
         $device = Device::findOrFail($device_id);
 
-        $name = $request->input('txt-name');
-        $type = DeviceType::findOrFail($request->input('sel-type'));
+        $validator = Validator::make($request->all(), [
+            'txt-name' => 'required|max:255',
+            'sel-type' => 'required|exists:device_types,id',
+        ], $this->validatorMessages);
 
-        $device->name = $name;
-        $device->device_type()->save($type);
-        $device->save();
-
-        return redirect('/devices');
+        if($validator->fails()) {
+            return back()->withInput()->withErrors($validator);
+        } else {
+            $name = $request->input('txt-name');
+            $type = DeviceType::findOrFail($request->input('sel-type'));
+            $device->name = $name;
+            $device->device_type()->save($type);
+            $device->save();
+            return redirect('/devices');
+        }
     }
 
     public function getDeletePage($device_id)
