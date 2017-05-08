@@ -1,5 +1,11 @@
 @extends('master')
 
+@section('breadcrumb')
+    <p class="navbar-text"><a href="{{url('/')}}">Home</a></p>
+    <p class="navbar-text divider-vertical"></p>
+    <p class="navbar-text">Login</p>
+@endsection
+
 @section('body')
     <div class="container">
         <div class="col-lg-6 col-lg-offset-3">
