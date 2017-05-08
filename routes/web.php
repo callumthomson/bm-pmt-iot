@@ -22,6 +22,15 @@ Route::post('/login', 'AuthController@postLogin');
 Route::get('/logout', 'AuthController@logout');
 
 /*
+ * User
+ */
+Route::get('/profile', 'UserController@getProfile');
+Route::post('/profile', 'UserController@postProfile');
+
+Route::get('/changepassword', 'UserController@getChangePassword');
+Route::post('/changepassword', 'UserController@postChangePassword');
+
+/*
  * Devices
  */
 // Index
