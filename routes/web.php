@@ -14,6 +14,14 @@
 Route::get('/', 'HomeController@index');
 
 /*
+ * Authentication
+ */
+Route::get('/login', 'AuthController@getLogin');
+Route::post('/login', 'AuthController@postLogin');
+
+Route::get('/logout', 'AuthController@logout');
+
+/*
  * Devices
  */
 // Index
