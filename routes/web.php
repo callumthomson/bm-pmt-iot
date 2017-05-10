@@ -52,5 +52,9 @@ Route::get('/device/{id}/messages', 'DeviceController@showMessages');
 
 Route::get('data/device/{id}', 'DeviceController@getDeviceData');
 Route::get('data/device/{id}/expected', 'DeviceController@getDeviceExpectedData');
+
+
 Route::get('data/device/{device}/test', 'DataGeneration@index');
-Route::get('data/device/{device}/testusage', 'DataGeneration@increasing');
+Route::get('data/device/{device}/testsinglef', 'DataGeneration@fluctuating_single');
+Route::get('data/device/{device}/testsinglei', 'DataGeneration@increasing_single');
+

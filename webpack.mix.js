@@ -1,6 +1,4 @@
-const {
-	mix
-} = require('laravel-mix');
+const {mix} = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -14,12 +12,12 @@ const {
  */
 
 mix.copy(
-	'node_modules/moment/min/moment.min.js',
-	'resources/assets/js'
+    'node_modules/moment/min/moment.min.js',
+    'resources/assets/js'
 )
 
 
 mix.sass('resources/assets/sass/app.scss',
-		'public/css/app.css').version();
+    'public/css/app.css').version();
 
 mix.copy('resources/assets/js/moment.min.js', 'public/js');

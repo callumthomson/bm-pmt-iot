@@ -30,7 +30,7 @@
                     <tr>
                         <td>{{ $expected_data['display'] }}</td>
                         @if($device->last_message)
-                            <td>{{ $device->last_message->body[$expected_data['id']] }}</td>
+                            <td class="{{ $expected_data['id'] }}">{{ $device->last_message->body[$expected_data['id']] }}</td>
                         @else
                             <td><em>No Data</em></td>
                         @endif
@@ -64,7 +64,8 @@
             function getDeviceMessages() {
                 var device_id = {{$device->id}};
                 $.ajax({
-                    url: "{{url('/data/device/'.$device->id.'/test')}}",
+                    url: "{{url('/data/device/'.$device->id.'')}}",
+                    // TODO display current data in the tale at the top of the page
                     success: function (data) {
                         var new_data = [];
                         $('#device_last_updated');
@@ -72,6 +73,7 @@
                             new_data[i] = [];
                             new_data[i][0] = new Date(v.created_at);
                             var num = 1;
+                            // TODO display data history in a table under graph
                             $.each(v.body, function (ii, vv) {
                                 new_data[i][num] = vv;
                                 num++;

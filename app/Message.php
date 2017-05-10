@@ -8,7 +8,7 @@ class Message extends Model
 {
     protected $table = 'messages';
     protected $primaryKey = 'id';
-    protected $fillable = ['body'];
+    protected $fillable = ['body', 'created_at'];
 
     protected $touches = ['device'];
 

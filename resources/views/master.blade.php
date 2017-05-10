@@ -5,8 +5,8 @@
 	<meta charset="utf-8"> @yield('head-start')
 	<title>{{ $title or 'Default' }}</title>
 	<link rel="stylesheet" href="{{ asset(mix('/css/app.css')) }}">
-	<meta name="viewport" content="width=device-width,initial-scale=1"> 
-	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" href="//cdn.materialdesignicons.com/1.9.32/css/materialdesignicons.min.css">
 	@yield('head-end')
 </head>
 
