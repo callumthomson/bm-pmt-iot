@@ -4,12 +4,21 @@ namespace Tests\Browser;
 
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 use App\User;
 
 class ProfileTest extends DuskTestCase
 {
+    public function testLogin()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/login')
+                ->type('txt-email', 'dev@dev.dev')
+                ->type('txt-password', 'secret')
+                ->press('Sign in');
+        });
+    }
+
     /**
      * Test updating personal details but leaving the name field empty.
      *
@@ -18,7 +27,7 @@ class ProfileTest extends DuskTestCase
     public function testSaveNoName()
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+            $browser//->loginAs(User::find(1))
                     ->visit('/profile')
                     ->assertSee('My Details')
                     ->type('txt-name', '')
@@ -35,7 +44,7 @@ class ProfileTest extends DuskTestCase
     public function testSaveNoEmail()
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+            $browser//->loginAs(User::find(1))
                     ->visit('/profile')
                     ->assertSee('My Details')
                     ->type('txt-email', '')
@@ -52,7 +61,7 @@ class ProfileTest extends DuskTestCase
     public function testSaveInvalidEmail()
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+            $browser//->loginAs(User::find(1))
                     ->visit('/profile')
                     ->assertSee('My Details')
                     ->type('txt-email', 'invalid@email')
@@ -69,7 +78,7 @@ class ProfileTest extends DuskTestCase
     public function testSaveNewName()
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+            $browser//->loginAs(User::find(1))
                     ->visit('/profile')
                     ->assertSee('My Details')
                     ->type('txt-name', 'DeveloperEdited')
@@ -86,7 +95,7 @@ class ProfileTest extends DuskTestCase
     public function testSaveNewEmail()
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+            $browser//->loginAs(User::find(1))
                     ->visit('/profile')
                     ->assertSee('My Details')
                     ->type('txt-email', 'dev-edited@dev.dev')
