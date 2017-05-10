@@ -31,6 +31,7 @@ class DeviceController extends Controller
     {
         $devices = Device::all();
         return view('device.index', [
+            'title' => 'Devices',
             'devices' => $devices
         ]);
     }
@@ -42,7 +43,9 @@ class DeviceController extends Controller
      */
     public function getCreatePage()
     {
-        return view('device.create');
+        return view('device.create', [
+            'title' => 'Create Device'
+        ]);
     }
 
     /**
@@ -82,6 +85,7 @@ class DeviceController extends Controller
     {
         $device = Device::findOrFail($device_id);
         return view('device.view', [
+            'title' => $device->name,
             'device' => $device
         ]);
     }
@@ -97,7 +101,8 @@ class DeviceController extends Controller
     {
         $device = Device::findOrFail($device_id);
         return view('device.update', [
-           'device' => $device
+            'title' => 'Update ' . $device->name,
+            'device' => $device
         ]);
     }
 
@@ -139,7 +144,10 @@ class DeviceController extends Controller
     public function getDeletePage($device_id)
     {
         $device = Device::findOrFail($device_id);
-        return view('device.delete', ['device' => $device]);
+        return view('device.delete', [
+            'title' => 'Delete ' . $device->name,
+            'device' => $device
+        ]);
     }
 
     /**

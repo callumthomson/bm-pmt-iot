@@ -17,7 +17,9 @@ class UserController extends Controller
      */
     public function getProfile()
     {
-        return view('user.profile');
+        return view('user.profile', [
+            'title' => 'Profile'
+        ]);
     }
 
     /**
@@ -60,7 +62,9 @@ class UserController extends Controller
      */
     public function getChangePassword()
     {
-        return view('user.changepassword');
+        return view('user.changepassword', [
+            'title' => 'Change Password'
+        ]);
     }
 
     /**
