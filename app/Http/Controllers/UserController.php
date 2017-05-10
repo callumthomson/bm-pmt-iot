@@ -10,11 +10,23 @@ use Validator;
 
 class UserController extends Controller
 {
+    /**
+     * Show the user profile page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getProfile()
     {
         return view('user.profile');
     }
 
+    /**
+     * Handle a profile update request POSTed from the profile page.
+     * Validate the data and attempt to save it to the database
+     *
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function postProfile(Request $request)
     {
         $messages = [
@@ -29,23 +41,34 @@ class UserController extends Controller
             'txt-email' => 'required|email|max:255',
         ], $messages);
 
-        if($validator->fails()) {
+        if($validator->fails()) { // Validation failed, go back and display errors
             return back()->withErrors($validator);
-        } else {
+        } else { // Validation passed, save the data
             Auth::user()->name = $request->input('txt-name');
             Auth::user()->email = $request->input('txt-email');
             Auth::user()->save();
 
             $request->session()->flash('save_status', true);
-            return back();
+            return back(); // Go back and display the success message
         }
     }
 
+    /**
+     * Show the change password page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getChangePassword()
     {
         return view('user.changepassword');
     }
 
+    /**
+     * Handle a change password request POSTed from the change password page
+     *
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function postChangePassword(Request $request)
     {
         // Check the current password is correct first

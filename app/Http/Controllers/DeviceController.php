@@ -22,6 +22,11 @@ class DeviceController extends Controller
         //$this->middleware('auth');
     }
 
+    /**
+     * Show the devices index page with all the devices
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $devices = Device::all();
@@ -30,11 +35,23 @@ class DeviceController extends Controller
         ]);
     }
 
+    /**
+     * Show the device creation page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getCreatePage()
     {
         return view('device.create');
     }
 
+    /**
+     * Handle a device creation request POSTed from the device creation page.
+     * Validate the data and attempt to create the device.
+     *
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function postCreatePage(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -53,15 +70,29 @@ class DeviceController extends Controller
         return redirect('/devices');
     }
 
+    /**
+     * Show the device info page.
+     * Get the device id from the url and use it to find the associated device in the database
+     *
+     * @param Request $request
+     * @param $device_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getDevicePage(Request $request, $device_id)
     {
         $device = Device::findOrFail($device_id);
-		$device->device_type;
         return view('device.view', [
             'device' => $device
         ]);
     }
 
+    /**
+     * Show the device update page.
+     * Get the device id from the url and use it to fill in the form with current data
+     *
+     * @param $device_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getUpdatePage($device_id)
     {
         $device = Device::findOrFail($device_id);
@@ -70,6 +101,14 @@ class DeviceController extends Controller
         ]);
     }
 
+    /**
+     * Handle a device update request POSTed from the device update page.
+     * Validate the data and attempt to update the device.
+     *
+     * @param Request $request
+     * @param $device_id
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function postUpdatePage(Request $request, $device_id)
     {
         $device = Device::findOrFail($device_id);
@@ -91,12 +130,24 @@ class DeviceController extends Controller
         }
     }
 
+    /**
+     * Show the delete page for a device
+     *
+     * @param $device_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getDeletePage($device_id)
     {
         $device = Device::findOrFail($device_id);
         return view('device.delete', ['device' => $device]);
     }
 
+    /**
+     * Handle a device delete request POSTed from the device delete page
+     *
+     * @param $device_id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function postDeletePage($device_id)
     {
         $device = Device::findOrFail($device_id);
@@ -104,12 +155,24 @@ class DeviceController extends Controller
         return redirect('/devices');
     }
 
+    /**
+     * Show device messages in JSON
+     *
+     * @param $device_id
+     * @return mixed
+     */
     public function showMessages($device_id)
     {
         $device = Device::findorFail($device_id);
         return $device->messages;
     }
-  
+
+    /**
+     * Get device data from the last 24 hours only.
+     *
+     * @param $device_id
+     * @return mixed
+     */
     public function getDeviceData($device_id){
         $device = Device::findorFail($device_id);
         $filtered = $device->messages->filter(function($value, $key){
@@ -118,10 +181,15 @@ class DeviceController extends Controller
         $device->data = $filtered;
         return $device;
     }
-  
+
+    /**
+     * Get the device type of a device (JSON)
+     *
+     * @param $device_id
+     * @return mixed
+     */
     public function getDeviceExpectedData($device_id){
-        $device = Device::findorFail($device_id);
-        return DeviceType::findorFail($device->type_id);
+        return Device::findorFail($device_id)->device_type;
     }
 }
 
