@@ -85,6 +85,25 @@ class DeviceTest extends DuskTestCase
     }
 
     /**
+     * Test deleting a device but cancelling before it gets deleted
+     *
+     * @return void
+     */
+    public function testCancelDeleteDevice()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/devices')
+                ->mouseover('#devices-list-group a:nth-child(5) i.mdi-delete')
+                ->click('#devices-list-group a:nth-child(5) i.mdi-delete')
+                ->assertPathIs('/device/5/delete')
+                ->assertSee('Delete Electricity Meter U')
+                ->clickLink('Cancel')
+                ->assertPathIs('/devices')
+                ->assertSee('Electricity Meter U');
+        });
+    }
+
+    /**
      * Test deleting a device
      *
      * @return void
