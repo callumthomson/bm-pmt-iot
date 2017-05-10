@@ -218,16 +218,16 @@ class DataGeneration extends Controller
 			}
 			if($i % $settings['interval'] == 0){
 				$id = $i-$starting_time;
-				$new_usage = mt_rand($current, $current + $settings['differential']);
-//				$new_array[] = array(
-//					'id' => $id,
-//					'device_id' => $device->id,
-//					'created_at' => date('Y-m-d H:i:s', $i),
-//					'body' => array(
-//						'usage' => $new_usage,
-//					)
-//				);
-				$new_array[] = $this->package($id, $device, ['usage' => $new_usage,], $i);
+				$new_usage = mt_rand($current*10, ($current + $settings['differential'])*10)/100;
+				$new_array[] = array(
+					'id' => $id,
+					'device_id' => $device->id,
+					'created_at' => date('Y-m-d H:i:s', $i),
+					'body' => array(
+						'usage' => $new_usage,
+					)
+				);
+//				$new_array[] = $this->package($id, $device, ['usage' => $new_usage,], $i);
 
 				$current = $new_usage;
 			}
