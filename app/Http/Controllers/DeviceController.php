@@ -36,6 +36,10 @@ class DeviceController extends Controller
         ]);
     }
 
+    public function getListDevices(){
+		return Device::all();
+	}
+
     /**
      * Show the device creation page
      *
