@@ -46,16 +46,22 @@ Route::post('/device/{id}/edit', 'DeviceController@postUpdatePage');
 // Delete
 Route::get('/device/{id}/delete', 'DeviceController@getDeletePage');
 Route::post('/device/{id}/delete', 'DeviceController@postDeletePage');
-
-
+// Messages
 Route::get('/device/{id}/messages', 'DeviceController@showMessages');
 
+// JSON List
 Route::get('data/devices', 'DeviceController@getListDevices');
 
 Route::get('data/device/{id}', 'DeviceController@getDeviceData');
 Route::get('data/device/{id}/expected', 'DeviceController@getDeviceExpectedData');
 
-
+/*
+ * These routes are only needed during development and presentation
+ * Can be deleted at production
+ */
 Route::get('data/device/{device}/test', 'DataGeneration@index');
 Route::get('data/device/{device}/testsingle', 'DataGeneration@single');
+/*
+ * End of dev routes
+ */
 
