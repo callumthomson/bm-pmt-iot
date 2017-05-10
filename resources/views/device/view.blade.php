@@ -13,8 +13,10 @@
         <div class="col-sm-8 col-sm-offset-2">
             <h1>{{ $device->name }}
                 <small>{{ $device->device_type->name }}</small>
-                <a class="btn btn-clear pull-right open-href" href="{{url('/device/'.$device->id.'/edit')}}"><i class="mdi mdi-pencil"></i></a>
-                <a class="btn btn-clear pull-right open-href" href="{{url('/device/'.$device->id.'/delete')}}"><i class="mdi mdi-delete"></i></a>
+                <a class="btn btn-clear pull-right open-href" href="{{url('/device/'.$device->id.'/edit')}}"><i
+                            class="mdi mdi-pencil"></i></a>
+                <a class="btn btn-clear pull-right open-href" href="{{url('/device/'.$device->id.'/delete')}}"><i
+                            class="mdi mdi-delete"></i></a>
             </h1>
             <p>
                 Created <span class="fromNow" time="{{ $device->created_at }}"></span>, last updated <strong
@@ -69,10 +71,10 @@
                     url: "{{url('/data/device/'.$device->id.'/')}}",
                     success: function (data) {
                         var new_data = [];
-                        $.each(data.last_message.body, function(i,v){
-                            $('.'+i).text(v);
+                        $.each(data.last_message.body, function (i, v) {
+                            $('.' + i).text(v);
                         });
-                        console.log(data.last_message.body);
+
                         $.each(data.data, function (i, v) {
                             new_data[i] = [];
                             new_data[i][0] = new Date(v.created_at);
@@ -98,7 +100,6 @@
                         $.each(data.expected_data, function (i, v) {
                             new_columns[i + 1] = ['number', v.display];
                         })
-                        console.log(new_columns);
                         chart_columns = new_columns;
                     }
                 })
@@ -108,7 +109,7 @@
                 var data = new google.visualization.DataTable();
                 var options = {
                     backgroundColor: '#F2F2F2',
-                    legend: { position: 'top', alignment: 'start' },
+                    legend: {position: 'top', alignment: 'start'},
                     title: null,
                     hAxis: {
                         title: 'Time'
@@ -123,9 +124,6 @@
                 $.each(chart_columns, function (i, v) {
                     data.addColumn(v[0], v[1]);
                 });
-//                data.addColumn({type: 'string', role: 'tooltip'});
-
-                console.log(include_data);
 
                 data.addRows(
                         include_data

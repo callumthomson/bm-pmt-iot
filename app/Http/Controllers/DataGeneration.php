@@ -233,7 +233,7 @@ class DataGeneration extends Controller
 		$device->data = $new_array;
 		return $device;
 	}
-	
+
 	public function increasing_single(Device $device, $settings = []){
 		$settings = array_merge($this->defaults, $settings);
 //		return $settings['datetime_stamp'];
