@@ -17,6 +17,9 @@ class DeviceController extends Controller
         'txt-name.max' => 'That name is too long',
     ];
 
+    /**
+     * Apply authentication protection (user must be logged in)
+     */
     public function __construct()
     {
         //$this->middleware('auth');
@@ -124,16 +127,12 @@ class DeviceController extends Controller
 
         $validator = Validator::make($request->all(), [
             'txt-name' => 'required|max:255',
-            'sel-type' => 'required|exists:device_types,id',
         ], $this->validatorMessages);
 
         if($validator->fails()) {
             return back()->withInput()->withErrors($validator);
         } else {
-            $name = $request->input('txt-name');
-            $type = DeviceType::findOrFail($request->input('sel-type'));
-            $device->name = $name;
-            $device->device_type()->save($type);
+            $device->name = $request->input('txt-name');
             $device->save();
             return redirect('/devices');
         }

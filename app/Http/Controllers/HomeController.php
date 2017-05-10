@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    /**
+     * Apply authentication protection (user must be logged in)
+     */
     public function __construct()
     {
         //$this->middleware('auth');

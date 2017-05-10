@@ -30,16 +30,6 @@
                         <input type="text" class="form-control" id="inputName" placeholder="Name" name="txt-name" value="{{ $device->name }}">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="inputType" class="col-sm-2 control-label">Type</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" id="inputType" name="sel-type">
-                            @foreach(App\DeviceType::all() as $deviceType)
-                                <option value="{{ $deviceType->id }}" @if($deviceType == $device->device_type) selected="selected" @endif>{{ $deviceType->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
                 {!! csrf_field() !!}
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">

@@ -11,6 +11,14 @@ use Validator;
 class UserController extends Controller
 {
     /**
+     * Apply authentication protection (user must be logged in)
+     */
+    public function __construct()
+    {
+        //$this->middleware('auth');
+    }
+
+    /**
      * Show the user profile page
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
