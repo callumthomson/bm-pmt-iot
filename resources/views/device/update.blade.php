@@ -30,6 +30,14 @@
                         <input type="text" class="form-control" id="inputName" placeholder="Name" name="txt-name" value="{{ $device->name }}">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="inputType" class="col-sm-2 control-label">Type</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="inputType" name="sel-type" disabled="disabled">
+                                <option>{{ $device->device_type->name }}</option>
+                        </select>
+                    </div>
+                </div>
                 {!! csrf_field() !!}
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
