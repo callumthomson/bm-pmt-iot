@@ -30,7 +30,7 @@ class DeviceTypesTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'name' => 'Gas Meter',
-                'expected_data' => '[{"id": "usage","display": "Usage","unit": "m<sup>3</sup>"}]',
+                'expected_data' => '[{"id": "usage","display": "Usage","unit": "m&sup3;"}]',
             ],
             [
                 'created_at' => Carbon::now(),
