@@ -118,10 +118,11 @@
                 };
                 var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 
-
+                // TODO add custom tooltips with units
                 $.each(chart_columns, function (i, v) {
                     data.addColumn(v[0], v[1]);
-                })
+                });
+//                data.addColumn({type: 'string', role: 'tooltip'});
 
                 console.log(include_data);
 
