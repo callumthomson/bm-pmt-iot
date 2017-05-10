@@ -17,7 +17,7 @@
             <div class="alert alert-danger" role="alert">
                 <i class="mdi mdi-alert"></i> This action is permanent and will also erase all communication history with the device!
             </div>
-            <a class="btn btn-default" href="{{url('/devices')}}">Cancel</a>
+            <a class="btn btn-default" href="{{ url()->previous() }}">Cancel</a>
             <form method="POST" style="display: inline;">
                 {!! csrf_field() !!}
                 <button class="btn btn-danger" type="submit">Delete</button>

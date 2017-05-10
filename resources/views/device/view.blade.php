@@ -13,6 +13,8 @@
         <div class="col-sm-8 col-sm-offset-2">
             <h1>{{ $device->name }}
                 <small>{{ $device->device_type->name }}</small>
+                <a class="btn btn-clear pull-right open-href" href="{{url('/device/'.$device->id.'/edit')}}"><i class="mdi mdi-pencil"></i></a>
+                <a class="btn btn-clear pull-right open-href" href="{{url('/device/'.$device->id.'/delete')}}"><i class="mdi mdi-delete"></i></a>
             </h1>
             <p>
                 Created <span class="fromNow" time="{{ $device->created_at }}"></span>, last updated <strong
