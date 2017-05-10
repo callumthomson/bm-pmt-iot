@@ -56,9 +56,9 @@ class UserController extends Controller
 
         // Now check the new passwords
         $messages = [
-            'txt-password1.required' => 'You need to provide another password',
-            'txt-password1.max' => 'Your new password is too long',
-            'txt-password2.same' => 'Your password confirmation does not match the new password',
+            'txt-password1.required' => 'You need to provide another password.',
+            'txt-password1.max' => 'Your new password is too long.',
+            'txt-password2.same' => 'Your password confirmation does not match the new password.',
         ];
         $validator = Validator::make($request->all(), [
             'txt-password1' => 'required|max:255',
