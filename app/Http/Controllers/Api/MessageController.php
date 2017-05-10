@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 
+use Carbon\Carbon;
+
 use App\Device;
 use App\Message;
 
@@ -19,10 +21,13 @@ class MessageController extends Controller
     public function receiveMessage(Request $request)
     {
         $device = Device::where('token', '=', $request->input('token'))
-            ->first();
+                            ->first();
         $message = new Message([
             'body' => $request->input('body')
         ]);
+        if($request->has('created_at')) {
+            $message->created_at = Carbon::parse($request->input('created_at'));
+        }
         $device->messages()->save($message);
     }
 }
