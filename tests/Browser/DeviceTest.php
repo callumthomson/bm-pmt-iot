@@ -27,6 +27,8 @@ class DeviceTest extends DuskTestCase
 
     /**
      * Test viewing a device
+     *
+     * @return void
      */
     public function testViewDevice()
     {
@@ -44,6 +46,8 @@ class DeviceTest extends DuskTestCase
 
     /**
      * Test updating a device
+     *
+     * @return void
      */
     public function testUpdateDevice()
     {
@@ -61,7 +65,9 @@ class DeviceTest extends DuskTestCase
     }
 
     /**
-     * Test updating a device
+     * Test updating a device without a name
+     *
+     * @return void
      */
     public function testUpdateDeviceNoName()
     {
@@ -80,6 +86,8 @@ class DeviceTest extends DuskTestCase
 
     /**
      * Test deleting a device
+     *
+     * @return void
      */
     public function testDeleteDevice()
     {
@@ -97,6 +105,8 @@ class DeviceTest extends DuskTestCase
 
     /**
      * Test creating a device
+     *
+     * @return void
      */
     public function testCreateDevice()
     {
@@ -114,6 +124,8 @@ class DeviceTest extends DuskTestCase
 
     /**
      * Test creating a device with no name
+     *
+     * @return void
      */
     public function testCreateDeviceNoName()
     {

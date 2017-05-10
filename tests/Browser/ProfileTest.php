@@ -5,10 +5,15 @@ namespace Tests\Browser;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 
-use App\User;
+//use App\User;
 
 class ProfileTest extends DuskTestCase
 {
+    /**
+     * Login to the application before carrying out other tests
+     *
+     * @return void
+     */
     public function testLogin()
     {
         $this->browse(function (Browser $browser) {

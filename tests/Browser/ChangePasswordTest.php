@@ -8,6 +8,11 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ChangePasswordTest extends DuskTestCase
 {
+    /**
+     * Login to the application before carrying out other tests
+     *
+     * @return void
+     */
     public function testLogin()
     {
         $this->browse(function (Browser $browser) {
