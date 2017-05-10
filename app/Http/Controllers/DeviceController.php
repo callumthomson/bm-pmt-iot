@@ -186,6 +186,7 @@ class DeviceController extends Controller
         $filtered = $device->messages->filter(function($value, $key){
             return $value->created_at->gt(Carbon::now()->subHours(24));
         })->values();
+		$device->last_message = $device->getLastMessageAttribute();
         $device->data = $filtered;
         return $device;
     }

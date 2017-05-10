@@ -40,7 +40,6 @@ class DataGeneration extends Controller
 			'00:00' => 1.0,
 		],
 		'datetime_string' => ''
-		// TODO work out current time in array
 	];
 
 	/**
@@ -62,21 +61,21 @@ class DataGeneration extends Controller
 
 
 
-		if($single){
-			if(in_array($device->type_id, $fluctuating)){
-				return $this->fluctuating_single($device);
-			}
-			if(in_array($device->type_id, $increasing)){
-				return $this->increasing_single($device);
-			}
-		} else {
+//		if($single){
+//			if(in_array($device->type_id, $fluctuating)){
+//				return $this->fluctuating_single($device);
+//			}
+//			if(in_array($device->type_id, $increasing)){
+//				return $this->increasing_single($device);
+//			}
+//		} else {
 			if(in_array($device->type_id, $fluctuating)){
 				return $this->fluctuating($device);
 			}
 			if(in_array($device->type_id, $increasing)){
 				return $this->increasing($device);
 			}
-		}
+//		}
 
     }
     public function single(Device $device){
@@ -217,69 +216,24 @@ class DataGeneration extends Controller
 		$target_time = $settings['datetime_stamp'];
 
 		for($i=$starting_time;$i<$target_time;$i++){
-			do {
-				if(array_key_exists(date('H:i', $i), $settings['differential_timing'])){
-					$settings['differential'] = $settings['differential_timing'][date('H:i', $i)];
+			if(array_key_exists(date('H:i', $i), $settings['differential_timing'])){
+				$settings['differential'] = $settings['differential_timing'][date('H:i', $i)];
+			}
+			if($i % $settings['interval'] == 0){
+				$id = $last_id;
+				$new_usage = ($new_usage*100 + mt_rand(0, ($settings['differential'])*100))/100;
+				$new_array[] = $this->package($id, $device, ['usage' => $new_usage,], $i);
+				$last_id++;
+				if($settings['single']){
+					$device->data = $new_array;
+					return $device;
 				}
-				if($i % $settings['interval'] == 0){
-					$id = $last_id;
-					$new_usage = ($new_usage*100 + mt_rand(0, ($settings['differential'])*100))/100;
-					$new_array[] = $this->package($id, $device, ['usage' => $new_usage,], $i);
-					$last_id++;
-					if($settings['single']){
-						break;
-					}
-				}
-			} while (!$settings['single']);
+			}
 		}
 		$device->data = $new_array;
 		return $device;
 	}
-
-	public function increasing_single_bak(Device $device, $settings = []){
-		// TODO finish generation of single data
-		$settings = array_merge($this->defaults, $settings);
-		return $settings;
-		$settings['duration'] = 86400*2;
-		$settings['differential'] = 0.2;
-		$settings['default_current'] = 1; // if data is not yet set
-		$settings['differential_timing'] = [
-			'05:00:00' => 0.2,
-			'06:30:00' => 0.8,
-			'09:00:00' => 0.2,
-			'16:00:00' => 1.0,
-			'20:00:00' => 1.5,
-			'00:00:00' => 1.0,
-		];
-
-		$time = date('H:i');
-
-		$current = (isset($device->last_message) ? $device->last_message->body['temp_current'] : $settings['default_current']); // get starting temperature
-
-		$new_array = [];
-
-		$starting_time = strtotime('now') - $settings['duration'];
-		$target_time = strtotime('now');
-
-		if(array_key_exists($time, $settings['differential_timing'])){
-			$settings['differential'] = $settings['differential_timing'][$time];
-		}
-		$id = (isset($device->last_message) ? $device->last_message->id +1 : 1);
-		$new_usage = mt_rand($current, $current + $settings['differential']);
-		$new_array[] = array(
-			'id' => $id,
-			'device_id' => $device->id,
-			'created_at' => date('Y-m-d H:i:s', $settings['datetime_string']),
-			'body' => array(
-				'usage' => $new_usage,
-			)
-		);
-
-		$new_array[] = $this->package($id, $device, ['usage' => $new_usage,], $settings['datetime_string']);
-
-		$device->data = $new_array;
-		return $device;
-	}
+	
 	public function increasing_single(Device $device, $settings = []){
 		$settings = array_merge($this->defaults, $settings);
 //		return $settings['datetime_stamp'];
