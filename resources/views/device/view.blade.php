@@ -66,16 +66,17 @@
             function getDeviceMessages() {
                 var device_id = {{$device->id}};
                 $.ajax({
-                    url: "{{url('/data/device/'.$device->id.'/test')}}",
-                    // TODO display current data in the tale at the top of the page
+                    url: "{{url('/data/device/'.$device->id.'/')}}",
                     success: function (data) {
                         var new_data = [];
-                        $('#device_last_updated');
+                        $.each(data.last_message.body, function(i,v){
+                            $('.'+i).text(v);
+                        });
+                        console.log(data.last_message.body);
                         $.each(data.data, function (i, v) {
                             new_data[i] = [];
                             new_data[i][0] = new Date(v.created_at);
                             var num = 1;
-                            // TODO display data history in a table under graph
                             $.each(v.body, function (ii, vv) {
                                 new_data[i][num] = vv;
                                 num++;
