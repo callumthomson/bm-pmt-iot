@@ -71,9 +71,11 @@
                     url: "{{url('/data/device/'.$device->id.'/')}}",
                     success: function (data) {
                         var new_data = [];
-                        $.each(data.last_message.body, function (i, v) {
-                            $('.' + i).text(v);
-                        });
+                        if(data.last_message !== null){
+                            $.each(data.last_message.body, function (i, v) {
+                                $('.' + i).text(v);
+                            });
+                        }
 
                         $.each(data.data, function (i, v) {
                             new_data[i] = [];
