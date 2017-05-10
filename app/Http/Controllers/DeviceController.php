@@ -17,6 +17,9 @@ class DeviceController extends Controller
         'txt-name.max' => 'That name is too long',
     ];
 
+    /**
+     * Apply authentication protection (user must be logged in)
+     */
     public function __construct()
     {
         //$this->middleware('auth');
